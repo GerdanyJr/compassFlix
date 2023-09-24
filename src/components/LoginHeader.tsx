@@ -3,14 +3,14 @@ import { StyleSheet, Text, View } from "react-native";
 
 interface LoginHeaderProps {
     title: string,
-    subtitle: string
+    subtitle?: string
 }
 
 export function LoginHeader(props: LoginHeaderProps): JSX.Element {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{props.title}</Text>
-            <Text style={styles.subtitle}>{props.subtitle}</Text>
+            {props.subtitle && <Text style={styles.subtitle}>{props.subtitle}</Text>}
         </View>
     )
 }

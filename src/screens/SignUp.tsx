@@ -7,6 +7,7 @@ import { LoginHeader } from '../components/LoginHeader';
 
 interface FormValues {
     email: string,
+    username: string,
     senha: string
 }
 
@@ -15,6 +16,7 @@ export function SignUp(): JSX.Element {
         mode: 'onChange',
         defaultValues: {
             email: '',
+            username: '',
             senha: ''
         }
     })
@@ -26,7 +28,7 @@ export function SignUp(): JSX.Element {
                 </ImageBackground>
             </View>
             <KeyboardAvoidingView style={styles.form} behavior='height'>
-                <LoginHeader title='Login' subtitle='Entre na sua conta para continuar.' />
+                <LoginHeader title='Cadastre-se' />
                 <Controller
                     control={control}
                     name='email'
@@ -37,6 +39,22 @@ export function SignUp(): JSX.Element {
                     render={({ fieldState, field: { onChange, value, name } }) =>
                         <InputField
                             iconName='at'
+                            placeholder={name}
+                            invalid={fieldState.invalid}
+                            onChange={onChange}
+                            value={value}
+                        />}
+                />
+                <Controller
+                    control={control}
+                    name='username'
+                    rules={{
+                        required: true,
+                        minLength: 5
+                    }}
+                    render={({ fieldState, field: { onChange, value, name } }) =>
+                        <InputField
+                            iconName='person-outline'
                             placeholder={name}
                             invalid={fieldState.invalid}
                             onChange={onChange}
@@ -60,7 +78,7 @@ export function SignUp(): JSX.Element {
                             secureTextEntry
                         />}
                 />
-                <FormButton title='Entrar' onPress={handleSubmit(() => console.log("Enviado"))} />
+                <FormButton title='Cadastrar' onPress={handleSubmit(() => console.log("Enviado"))} />
             </KeyboardAvoidingView>
         </View>
     )
