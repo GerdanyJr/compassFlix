@@ -1,9 +1,10 @@
 import React from 'react';
 import { Image, ImageBackground, KeyboardAvoidingView, StyleSheet, View } from 'react-native';
 import { InputField } from '../components/InputField';
-import { FormButton } from '../components/FormButton';
+import { FormButton } from '../components/UI/FormButton';
 import { Controller, useForm } from 'react-hook-form';
 import { LoginHeader } from '../components/LoginHeader';
+import { Redirect } from '../components/UI/Redirect';
 
 interface FormValues {
     email: string,
@@ -11,7 +12,7 @@ interface FormValues {
     senha: string
 }
 
-export function SignUp(): JSX.Element {
+export function SignUp({ navigation }: { navigation: any }): JSX.Element {
     const { control, handleSubmit } = useForm<FormValues>({
         mode: 'onChange',
         defaultValues: {
@@ -77,6 +78,10 @@ export function SignUp(): JSX.Element {
                             value={value}
                             secureTextEntry
                         />}
+                />
+                <Redirect
+                    text='Não possui uma conta? Cadastre-se'
+                    onPress={() => { navigation.navigate('Login') }}
                 />
                 <FormButton title='Cadastrar' onPress={handleSubmit(() => console.log("Enviado"))} />
             </KeyboardAvoidingView>

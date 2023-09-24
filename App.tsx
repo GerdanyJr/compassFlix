@@ -18,8 +18,8 @@ function App(): JSX.Element {
 function AuthenticateStack(): JSX.Element {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen component={SignUp} name='SignUp' />   
       <Stack.Screen component={Login} name='Login' />
+      <Stack.Screen component={SignUp} name='SignUp' />   
     </Stack.Navigator>
   )
 }
