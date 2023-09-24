@@ -1,24 +1,42 @@
-import React from 'react';
-import { Image, ImageBackground, KeyboardAvoidingView, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { Alert, Image, ImageBackground, KeyboardAvoidingView, StyleSheet, View } from 'react-native';
+import { Controller, useForm } from 'react-hook-form';
+
 import { InputField } from '../components/InputField';
 import { FormButton } from '../components/UI/FormButton';
-import { Controller, useForm } from 'react-hook-form';
 import { LoginHeader } from '../components/LoginHeader';
 import { Redirect } from '../components/UI/Redirect';
+import { login } from '../services/auth';
+import { AuthContext } from '../store/AuthContext';
 
 interface FormValues {
     email: string,
-    senha: string
+    password: string
 }
 
 export function Login({ navigation }: { navigation: any }): JSX.Element {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const authCtx = useContext(AuthContext);
     const { control, handleSubmit } = useForm<FormValues>({
         mode: 'onChange',
         defaultValues: {
             email: '',
-            senha: ''
+            password: ''
         }
-    })
+    });
+
+    async function handleLogin(data: FormValues) {
+        try {
+            setIsLoading(true);
+            const response = await login(data.email, data.password);
+            const token = await response.user.getIdToken();
+            authCtx.authenticate(response.user, token);
+        } catch (error: any) {
+            Alert.alert('Error', error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    }
     return (
         <View style={styles.container}>
             <View style={styles.backgroundContainer}>
@@ -46,7 +64,7 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
                 />
                 <Controller
                     control={control}
-                    name='senha'
+                    name='password'
                     rules={{
                         required: true,
                         minLength: 8
@@ -65,7 +83,11 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
                     text='Não possui uma conta? Cadastre-se'
                     onPress={() => { navigation.navigate('SignUp') }}
                 />
-                <FormButton title='Entrar' onPress={handleSubmit(() => console.log("Enviado"))} />
+                <FormButton
+                    title='Entrar'
+                    isLoading={isLoading}
+                    onPress={handleSubmit((formValues: FormValues) => handleLogin(formValues))}
+                />
             </KeyboardAvoidingView>
         </View>
     )

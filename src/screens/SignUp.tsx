@@ -1,5 +1,5 @@
-import React from 'react';
-import { Image, ImageBackground, KeyboardAvoidingView, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, Image, ImageBackground, KeyboardAvoidingView, Modal, StyleSheet, Text, View } from 'react-native';
 import { InputField } from '../components/InputField';
 import { FormButton } from '../components/UI/FormButton';
 import { Controller, useForm } from 'react-hook-form';
@@ -14,6 +14,7 @@ interface FormValues {
 }
 
 export function SignUp({ navigation }: { navigation: any }): JSX.Element {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const { control, handleSubmit } = useForm<FormValues>({
         mode: 'onChange',
         defaultValues: {
@@ -25,10 +26,13 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
 
     async function handleSignup(data: FormValues) {
         try {
+            setIsLoading(true);
             await signUp(data.email, data.password, data.username);
             navigation.navigate('Login');
-        } catch (error) {
-            console.log(error);
+        } catch (error: any) {
+            Alert.alert('Error', error.message);
+        } finally {
+            setIsLoading(false);
         }
     }
     return (
@@ -93,7 +97,11 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
                     text='Não possui uma conta? Cadastre-se'
                     onPress={() => { navigation.navigate('Login') }}
                 />
-                <FormButton title='Cadastrar' onPress={handleSubmit((data) => handleSignup(data))} />
+                <FormButton
+                    title='Cadastrar'
+                    isLoading={isLoading}
+                    onPress={handleSubmit((data) => handleSignup(data))}
+                />
             </KeyboardAvoidingView>
         </View>
     )
