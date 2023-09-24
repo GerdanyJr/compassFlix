@@ -5,11 +5,12 @@ import { FormButton } from '../components/UI/FormButton';
 import { Controller, useForm } from 'react-hook-form';
 import { LoginHeader } from '../components/LoginHeader';
 import { Redirect } from '../components/UI/Redirect';
+import { signUp } from '../services/auth';
 
 interface FormValues {
     email: string,
     username: string,
-    senha: string
+    password: string
 }
 
 export function SignUp({ navigation }: { navigation: any }): JSX.Element {
@@ -18,9 +19,18 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
         defaultValues: {
             email: '',
             username: '',
-            senha: ''
+            password: ''
         }
-    })
+    });
+
+    async function handleSignup(data: FormValues) {
+        try {
+            await signUp(data.email, data.password, data.username);
+            navigation.navigate('Login');
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <View style={styles.container}>
             <View style={styles.backgroundContainer}>
@@ -64,7 +74,7 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
                 />
                 <Controller
                     control={control}
-                    name='senha'
+                    name='password'
                     rules={{
                         required: true,
                         minLength: 8
@@ -83,7 +93,7 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
                     text='Não possui uma conta? Cadastre-se'
                     onPress={() => { navigation.navigate('Login') }}
                 />
-                <FormButton title='Cadastrar' onPress={handleSubmit(() => console.log("Enviado"))} />
+                <FormButton title='Cadastrar' onPress={handleSubmit((data) => handleSignup(data))} />
             </KeyboardAvoidingView>
         </View>
     )
