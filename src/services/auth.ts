@@ -1,6 +1,6 @@
 import { app } from "./firebaseConfig";
 import * as firebase from 'firebase/auth'
-import { createUserWithEmailAndPassword, initializeAuth, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, initializeAuth, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface AuthError {
@@ -18,4 +18,13 @@ export async function signUp(email: string, password: string, username: string) 
     const response = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(response.user, { displayName: username });
     return response.user;
+}
+
+export async function login(email: string, password: string) {
+    const response = await signInWithEmailAndPassword(auth, email, password);
+    return response;
+}
+
+export async function signOut() {
+    await firebase.signOut(auth);
 }
