@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "384733747178",
+    "project_id": "compass-flix",
+    "storage_bucket": "compass-flix.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384733747178:android:0165a9e813b05a23a08493",
+        "android_client_info": {
+          "package_name": "com.compassflix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7JmRKs7FJ6V5lDogS32GwggR7rwZn63I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
