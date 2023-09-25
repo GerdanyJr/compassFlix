@@ -42,21 +42,21 @@ function AuthenticatedStack(): JSX.Element {
         component={Home}
         name='Home'
         options={{
-          tabBarIcon: ({ color, size }) => <Ionicons name='home-outline' color={color} size={size} />
+          tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? 'home' : 'home-outline'} color={color} size={size} />
         }}
       />
       <BottomTabs.Screen
         component={Favorites}
         name='Favorites'
         options={{
-          tabBarIcon: ({ color, size }) => <Ionicons name='star-outline' color={color} size={size} />
+          tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? 'star' : 'star-outline'} color={color} size={size} />
         }}
       />
       <BottomTabs.Screen
         component={Settings}
         name='Settings'
         options={{
-          tabBarIcon: ({ color, size }) => <Ionicons name='settings-outline' color={color} size={size} />
+          tabBarIcon: ({ color, size, focused }) => <Ionicons name={focused ? 'settings' : 'settings-outline'} color={color} size={size} />
         }}
       />
     </BottomTabs.Navigator>
