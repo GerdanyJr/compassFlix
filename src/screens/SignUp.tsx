@@ -109,8 +109,7 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: 'black'
+        flex: 1
     },
     backgroundContainer: {
         width: '100%',
