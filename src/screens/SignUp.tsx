@@ -6,6 +6,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { LoginHeader } from '../components/LoginHeader';
 import { Redirect } from '../components/UI/Redirect';
 import { signUp } from '../services/auth';
+import { createUserOnDatabase } from '../services/database';
 
 interface FormValues {
     email: string,
@@ -27,7 +28,8 @@ export function SignUp({ navigation }: { navigation: any }): JSX.Element {
     async function handleSignup(data: FormValues) {
         try {
             setIsLoading(true);
-            await signUp(data.email, data.password, data.username);
+            const newUser = await signUp(data.email, data.password, data.username);
+            await createUserOnDatabase(newUser);
             navigation.navigate('Login');
         } catch (error: any) {
             Alert.alert('Error', error.message);
