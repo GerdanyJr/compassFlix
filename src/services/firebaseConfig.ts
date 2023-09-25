@@ -7,6 +7,7 @@ const firebaseConfig = {
   storageBucket: "compass-flix.appspot.com",
   messagingSenderId: "384733747178",
   appId: "1:384733747178:web:ea062ae8e85caf29a08493",
+  databaseURL: "https://compass-flix-default-rtdb.firebaseio.com/",
   measurementId: "G-K10CGZN4V4"
 };
 
