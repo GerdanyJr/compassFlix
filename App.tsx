@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { DarkTheme, NavigationContainer } from '@react-navigation/native';
-import { StatusBar, Text } from 'react-native';
+import { StatusBar } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SignUp } from './src/screens/SignUp';
 import { Login } from './src/screens/Login';
