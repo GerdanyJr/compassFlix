@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Pressable, StyleSheet } from 'react-native';
 
 interface MoviePosterProps {
-    id: number,
+    id: string,
     url: string
 }
 

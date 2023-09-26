@@ -16,7 +16,7 @@ export function HomeHeader(props: HomeHeaderProps) {
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: 64
+        paddingTop: 64
     },
     username: {
         color: '#E9A6A6'
