@@ -1,4 +1,4 @@
 export interface ShowcaseMovie {
-    backdrop_path: string,
+    poster_path: string,
     id: string
 }

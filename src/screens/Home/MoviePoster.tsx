@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Image, Pressable, StyleSheet } from 'react-native';
 
 interface MoviePosterProps {
@@ -6,13 +6,13 @@ interface MoviePosterProps {
     url: string
 }
 
-export function MoviePoster(props: MoviePosterProps) {
+export const MoviePoster = memo((props: MoviePosterProps) => {
     return (
         <Pressable onPress={() => console.log(props.id)}>
             <Image source={{ uri: props.url }} style={styles.image} />
         </Pressable>
     );
-}
+});
 
 const styles = StyleSheet.create({
     image: {

@@ -5,7 +5,8 @@ import { ShowcaseMovie } from "../../types/ShowcaseMovie";
 
 interface MoviesScrollProps {
     title: string,
-    data: ShowcaseMovie[]
+    data: ShowcaseMovie[],
+    onEndReached?: () => void
 }
 
 export function MoviesScroll(props: MoviesScrollProps) {
@@ -15,10 +16,12 @@ export function MoviesScroll(props: MoviesScrollProps) {
             <FlatList
                 data={props.data}
                 keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => <MoviePoster id={item.id} url={item.backdrop_path} />}
+                renderItem={({ item }) => <MoviePoster id={item.id} url={item.poster_path} />}
                 ItemSeparatorComponent={() => <View style={{ paddingHorizontal: 4 }}></View>}
                 horizontal
                 showsHorizontalScrollIndicator={false}
+                onEndReachedThreshold={0.9}
+                onEndReached={props.onEndReached}
             />
         </View>
     )
