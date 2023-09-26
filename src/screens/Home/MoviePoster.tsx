@@ -16,7 +16,8 @@ export function MoviePoster(props: MoviePosterProps) {
 
 const styles = StyleSheet.create({
     image: {
-        width: 110,
-        height: 150
+        width: 105,
+        height: 150,
+        borderRadius: 8
     }
 });
