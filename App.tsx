@@ -6,7 +6,7 @@ import { SignUp } from './src/screens/SignUp';
 import { Login } from './src/screens/Login';
 import { AuthContext, AuthContextProvider } from './src/store/AuthContext';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home } from './src/screens/Home';
+import { Home } from './src/screens/Home/Home';
 import { Settings } from './src/screens/Settings';
 import { Favorites } from './src/screens/Favorites';
 import Ionicons from 'react-native-vector-icons/Ionicons';
