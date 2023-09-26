@@ -9,7 +9,7 @@ export function HomeHeader(props: HomeHeaderProps) {
     return (
         <View style={styles.container}>
             <Text style={styles.headerTitle}>Olá, <Text style={styles.username}>{props.username}</Text>!</Text>
-            <Text>Reveja ou acompanhe os filmes que você assistiu...</Text>
+            <Text style={styles.headerSubtitle}>Reveja ou acompanhe os filmes que você assistiu...</Text>
         </View>
     );
 }
@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize: 28,
+        color: 'white',
         fontWeight: 'bold'
+    },
+    headerSubtitle: {
+        color: 'white'
     }
 });
