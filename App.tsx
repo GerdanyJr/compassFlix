@@ -10,6 +10,7 @@ import { Home } from './src/screens/Home/Home';
 import { Settings } from './src/screens/Settings';
 import { Favorites } from './src/screens/Favorites';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { MoviePage } from './src/screens/Home/MoviePage';
 
 const BottomTabs = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -32,6 +33,24 @@ function RootStack(): JSX.Element {
 }
 
 function AuthenticatedStack(): JSX.Element {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen component={BottomTabsNavigator} name='MainScreen' />
+      <Stack.Screen component={MoviePage} name='MoviePage' options={{ presentation: 'modal' }} />
+    </Stack.Navigator>
+  );
+}
+
+function AuthenticateStack(): JSX.Element {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen component={Login} name='Login' />
+      <Stack.Screen component={SignUp} name='SignUp' />
+    </Stack.Navigator>
+  )
+}
+
+function BottomTabsNavigator() {
   return (
     <BottomTabs.Navigator screenOptions={{
       headerShown: false,
@@ -60,15 +79,6 @@ function AuthenticatedStack(): JSX.Element {
         }}
       />
     </BottomTabs.Navigator>
-  )
-}
-
-function AuthenticateStack(): JSX.Element {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen component={Login} name='Login' />
-      <Stack.Screen component={SignUp} name='SignUp' />
-    </Stack.Navigator>
   )
 }
 
