@@ -8,7 +8,6 @@ export interface Movie {
     production_companies: Array<Company>;
     cast: Array<Actor>;
     crew: Array<CrewMember>;
-    production_countries: Array<{ iso_3166_1: string; name: string }>;
     spoken_languages: Array<{ english_name: string; iso_639_1: string; name: string }>;
     adult: boolean;
     backdrop_path: string;
