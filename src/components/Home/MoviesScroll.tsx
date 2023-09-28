@@ -37,7 +37,7 @@ export function MoviesScroll(props: MoviesScrollProps) {
             <FlatList
                 data={movies}
                 keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => <MoviePoster id={item.id} url={item.poster_path} />}
+                renderItem={({ item }) => <MoviePoster id={item.id.toString()} url={item.poster_path} />}
                 ItemSeparatorComponent={() => <View style={{ paddingHorizontal: 4 }}></View>}
                 showsHorizontalScrollIndicator={false}
                 onEndReachedThreshold={0.9}

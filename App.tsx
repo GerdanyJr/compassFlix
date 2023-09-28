@@ -6,11 +6,11 @@ import { SignUp } from './src/screens/SignUp';
 import { Login } from './src/screens/Login';
 import { AuthContext, AuthContextProvider } from './src/store/AuthContext';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home } from './src/screens/Home/Home';
+import { Home } from './src/screens/Home';
 import { Settings } from './src/screens/Settings';
 import { Favorites } from './src/screens/Favorites';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { MoviePage } from './src/screens/Home/MoviePage';
+import { MoviePage } from './src/screens/MoviePage';
 
 const BottomTabs = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -28,7 +28,7 @@ function App(): JSX.Element {
 function RootStack(): JSX.Element {
   const authCtx = useContext(AuthContext);
   return (
-    authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthenticateStack />
+    true ? <AuthenticatedStack /> : <AuthenticateStack />
   )
 }
 
@@ -36,7 +36,7 @@ function AuthenticatedStack(): JSX.Element {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen component={BottomTabsNavigator} name='MainScreen' />
-      <Stack.Screen component={MoviePage} name='MoviePage' options={{ presentation: 'modal' }} />
+      <Stack.Screen component={MoviePage} name='MoviePage' />
     </Stack.Navigator>
   );
 }
