@@ -5,20 +5,24 @@ import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 interface MoviePosterProps {
     id: string,
-    url: string
+    url: string,
+    pressableStyles?: any,
+    imageStyles?: any,
 }
 
 export const MoviePoster = memo((props: MoviePosterProps) => {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
     return (
         <View>
-            <Pressable style={styles.container} onPress={() => navigation.navigate('MoviePage')} android_ripple={{ foreground: true, color: 'grey' }}>
+            <Pressable style={[props.pressableStyles, styles.container]}
+                onPress={() => navigation.push('MoviePage', { movieId: props.id })}
+                android_ripple={{ foreground: true, color: 'grey' }}>
                 <Image
                     source={{ uri: props.url }}
-                    style={styles.image}
+                    style={[styles.image, props.imageStyles]}
                 />
             </Pressable>
-        </View>
+        </View >
     );
 });
 
