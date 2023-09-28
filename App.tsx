@@ -35,8 +35,8 @@ function RootStack(): JSX.Element {
 function AuthenticatedStack(): JSX.Element {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen component={MoviePage} name='MoviePage' />
       <Stack.Screen component={BottomTabsNavigator} name='MainScreen' />
+      <Stack.Screen component={MoviePage} name='MoviePage' />
     </Stack.Navigator>
   );
 }
