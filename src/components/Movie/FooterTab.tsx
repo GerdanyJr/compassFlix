@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
-import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
+import { TabBar, TabView } from 'react-native-tab-view';
 import { Cast } from './Cast';
 import { Suggested } from './Suggested';
 import { Actor } from '../../types/Actor';
