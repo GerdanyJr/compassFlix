@@ -4,6 +4,7 @@ import { MovieHeader } from '../components/Movie/MovieHeader';
 import { FooterTab } from '../components/Movie/FooterTab';
 import { Movie } from '../types/Movie';
 import { getSingleMovie } from '../services/moviesHttp';
+import { LoadingOverlay } from '../components/UI/LoadingOverlay';
 
 export function MoviePage({ route }: { route: any }) {
     const [movie, setMovie] = useState<Movie>();
@@ -16,20 +17,29 @@ export function MoviePage({ route }: { route: any }) {
         }
         fetchMovie();
     }, []);
-    return isLoading ? (
-        <ActivityIndicator />) :
-        (<View style={styles.container}>
-            <MovieHeader movie={movie!} />
-            <View style={styles.movieDataContainer}>
-                <Text style={styles.overview}>
-                    {movie!.overview}
-                </Text>
+
+    function Movie() {
+        return (
+            <View style={styles.container}>
+                <MovieHeader movie={movie!} />
+                <View style={styles.movieDataContainer}>
+                    <Text style={styles.overview}>
+                        {movie!.overview}
+                    </Text>
+                </View>
+                <FooterTab
+                    castMembers={movie!.cast}
+                    movieId={route.params?.movieId}
+                />
             </View>
-            <FooterTab
-                castMembers={movie!.cast}
-                movieId={route.params?.movieId}
-            />
-        </View>)
+        )
+    }
+    return (
+        <>
+            {isLoading && <LoadingOverlay />}
+            {!isLoading && <Movie />}
+        </>
+    )
 }
 
 
