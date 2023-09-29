@@ -5,6 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { Movie } from "../../types/Movie";
 import { toggleFavorite } from "../../services/database";
 import { AuthContext } from "../../store/AuthContext";
+import YoutubePlayer from "react-native-youtube-iframe";
 
 interface MovieHeaderProps {
     movie: Movie
@@ -27,7 +28,13 @@ export function MovieHeader({ movie }: MovieHeaderProps) {
 
     return (
         <View>
-            <Image source={{ uri: movie.backdrop_path }} style={styles.backdropImg} />
+            {!(movie.trailers.length > 0) && <Image source={{ uri: movie.backdrop_path }} style={styles.backdropImg} />}
+            {(movie.trailers.length > 0) &&
+                <YoutubePlayer
+                    height={styles.backdropImg.height}
+                    play={true}
+                    videoId={movie.trailers[0].key}
+                />}
             <View style={styles.infoContainer}>
                 <Image source={{ uri: movie.poster_path }} style={styles.posterImg} />
                 <View style={styles.header}>
