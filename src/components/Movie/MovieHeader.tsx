@@ -1,15 +1,28 @@
+import React, { useContext } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { getYear, numberFormatter } from "../../util/formatter";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Movie } from "../../types/Movie";
+import { toggleFavorite } from "../../services/database";
+import { AuthContext } from "../../store/AuthContext";
 
 interface MovieHeaderProps {
     movie: Movie
 }
 
 export function MovieHeader({ movie }: MovieHeaderProps) {
+    const authCtx = useContext(AuthContext);
     function getDirector(movie: Movie) {
         return movie.crew.filter(member => member.job === 'Director')[0].name;
+    }
+
+    function isFav() {
+        return authCtx.favMovies.includes(movie.id);
+    }
+
+    async function handleFavoriteClick() {
+        const newFavs = await toggleFavorite(authCtx.user!, authCtx.favMovies, movie.id);
+        authCtx.setFavMovies(newFavs);
     }
 
     return (
@@ -30,8 +43,10 @@ export function MovieHeader({ movie }: MovieHeaderProps) {
                     <Text style={[styles.diretorContainer, styles.primaryText]}>Direção por <Text style={styles.diretor}>{getDirector(movie)}</Text></Text>
                     <View style={styles.rateContainer}>
                         <Text style={styles.voteAvg}>{numberFormatter.format(movie.vote_average)}/10</Text>
-                        <Pressable style={styles.rate} onPress={() => console.log(movie.id)}>
-                            <Ionicons name="heart-outline" size={28} />
+                        <Pressable style={styles.rate} onPress={handleFavoriteClick}>
+                            <Ionicons name={isFav() ? "heart" : "heart-outline"}
+                                size={28}
+                                color={isFav() ? "#e50913" : "grey"} />
                             <Text>{numberFormatter.format(movie.vote_count)}</Text>
                         </Pressable>
                     </View>

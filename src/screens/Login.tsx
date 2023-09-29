@@ -28,8 +28,9 @@ export function Login({ navigation }: { navigation: any }): JSX.Element {
     async function handleLogin(data: FormValues) {
         try {
             setIsLoading(true);
-            const response = await login(data.email, data.password);
+            const [response, favMovies] = await login(data.email, data.password);
             const token = await response.user.getIdToken();
+            authCtx.setFavMovies(favMovies);
             authCtx.authenticate(response.user, token);
         } catch (error: any) {
             Alert.alert('Error', error.message);
