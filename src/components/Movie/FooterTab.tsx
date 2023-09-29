@@ -4,6 +4,7 @@ import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import { Cast } from './Cast';
 import { Suggested } from './Suggested';
 import { Actor } from '../../types/Actor';
+import { LoadingOverlay } from '../UI/LoadingOverlay';
 
 interface FooterTabProps {
     castMembers: Actor[],
@@ -50,6 +51,7 @@ export function FooterTab({ castMembers, movieId }: FooterTabProps) {
             initialLayout={{ width: Dimensions.get('window').width }}
             renderTabBar={renderTabBar}
             style={{ paddingHorizontal: 14 }}
+            renderLazyPlaceholder={() => <LoadingOverlay />}
         />
     );
 }
