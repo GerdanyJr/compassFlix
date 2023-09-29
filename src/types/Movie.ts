@@ -2,6 +2,7 @@ import { Actor } from "./Actor";
 import { Categories } from "./Categories";
 import { Company } from "./Company";
 import { CrewMember } from "./CrewMember";
+import { Trailer } from "./Trailer";
 
 export interface Movie {
     genres: Array<Categories>;
@@ -9,6 +10,7 @@ export interface Movie {
     cast: Array<Actor>;
     crew: Array<CrewMember>;
     spoken_languages: Array<{ english_name: string; iso_639_1: string; name: string }>;
+    trailers: Array<Trailer>;
     adult: boolean;
     backdrop_path: string;
     belongs_to_collection: null | object;
