@@ -2,6 +2,7 @@ import { app } from "./firebaseConfig";
 import * as firebase from 'firebase/auth'
 import { createUserWithEmailAndPassword, initializeAuth, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import { getFavMovies } from "./database";
 
 export interface AuthError {
     message: string,
@@ -22,7 +23,8 @@ export async function signUp(email: string, password: string, username: string) 
 
 export async function login(email: string, password: string) {
     const response = await signInWithEmailAndPassword(auth, email, password);
-    return response;
+    const favMovies = await getFavMovies(response.user);
+    return [response, favMovies];
 }
 
 export async function signOut() {

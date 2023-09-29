@@ -10,20 +10,24 @@ export async function createUserOnDatabase(user: User) {
     });
 }
 
-export async function addFavorite(user: User) {
-    const id = '84';
+export async function getFavMovies(user: User) {
     const response = await get(ref(database, `/users/${user.uid}/favMovies`));
-    const prevFavs = response.val() ? response.val() : [];
-    await update(ref(database, `/users/${user.uid}`), {
-        favMovies: [...prevFavs, id]
-    });
+    const favs = response.val() ? response.val() : [];
+    return favs;
 }
 
-export async function removeFavorite(user: User) {
-    const id = '25';
-    const response = await get(ref(database, `/users/${user.uid}/favMovies`));
-    const prevFavs = response.val() ? response.val() : [];
+export async function toggleFavorite(user: User, favMovies: number[], movieId: number) {
+    const newFavs = toggleItem(favMovies, movieId);
     await update(ref(database, `/users/${user.uid}`), {
-        favMovies: prevFavs.filter((fav: string) => fav !== id)
+        favMovies: newFavs
     });
+    return newFavs;
+}
+
+function toggleItem(items: number[], id: number) {
+    if (items.includes(id)) {
+        return items.filter(items => items !== id);
+    } else {
+        return [...items, id];
+    }
 }
