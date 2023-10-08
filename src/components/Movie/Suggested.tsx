@@ -38,7 +38,8 @@ export const Suggested = memo(({ movieId }: { movieId: string }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 18
+        marginTop: 18,
+        alignItems: 'center'
     },
     movieStyle: {
         marginHorizontal: 2
