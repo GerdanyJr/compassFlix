@@ -28,13 +28,7 @@ export function MovieHeader({ movie }: MovieHeaderProps) {
 
     return (
         <View>
-            {!(movie.trailers.length > 0) && <Image source={{ uri: movie.backdrop_path }} style={styles.backdropImg} />}
-            {(movie.trailers.length > 0) &&
-                <YoutubePlayer
-                    height={styles.backdropImg.height}
-                    play={true}
-                    videoId={movie.trailers[0].key}
-                />}
+            <Image source={{ uri: movie.backdrop_path }} style={styles.backdropImg} />
             <View style={styles.infoContainer}>
                 <Image source={{ uri: movie.poster_path }} style={styles.posterImg} />
                 <View style={styles.header}>
