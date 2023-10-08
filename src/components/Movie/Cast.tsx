@@ -10,7 +10,6 @@ export function Cast({ cast }: { cast: Actor[] }) {
                 data={cast}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => <CastMember member={item} />}
-
             />
         </View>
     );
@@ -31,7 +30,7 @@ function CastMember({ member }: { member: Actor }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 18
+        marginTop: 8
     },
     actorContainer: {
         flexDirection: 'row',

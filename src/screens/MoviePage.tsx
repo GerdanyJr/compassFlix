@@ -23,14 +23,12 @@ export function MoviePage({ route }: { route: any }) {
             <View style={styles.container}>
                 <MovieHeader movie={movie!} />
                 <View style={styles.movieDataContainer}>
-                    <Text style={styles.overview}>
-                        {movie!.overview}
-                    </Text>
+                    <FooterTab
+                        movie={movie!}
+                        castMembers={movie!.cast}
+                        movieId={route.params?.movieId}
+                    />
                 </View>
-                <FooterTab
-                    castMembers={movie!.cast}
-                    movieId={route.params?.movieId}
-                />
             </View>
         )
     }
@@ -48,10 +46,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     movieDataContainer: {
-        paddingHorizontal: 14,
-        paddingBottom: 12
+        flex: 1,
+        paddingBottom: 4
     },
-    overview: {
-        color: 'white',
-    }
 });
